@@ -6,7 +6,12 @@ abstract class Model<T> {
   Model({this.id});
 
   @override
-  bool operator ==(other) {
-    return other is Model && id == other.id;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Model<T> && other.id == id;
   }
+
+  @override
+  int get hashCode => id.hashCode;
 }

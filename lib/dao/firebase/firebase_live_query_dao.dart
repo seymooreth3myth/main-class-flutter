@@ -12,7 +12,6 @@ abstract class FirebaseLiveQueryDAO<M extends Model, Q extends Query> {
   firestore.CollectionReference get _collection =>
       firestore.FirebaseFirestore.instance.collection(collectionName);
 
-  @override
   Stream<List<M>> query(Q query) {
     firestore.Query whereQuery = where(_collection, query);
 
@@ -27,7 +26,9 @@ abstract class FirebaseLiveQueryDAO<M extends Model, Q extends Query> {
     Stream<firestore.QuerySnapshot> stream = whereQuery.snapshots();
 
     return stream.map(
-      (snap) => snap.docs.map((doc) => fromJson(doc.id, doc.data() as dynamic)).toList(),
+      (snap) => snap.docs
+          .map((doc) => fromJson(doc.id, doc.data() as dynamic))
+          .toList(),
     );
   }
 

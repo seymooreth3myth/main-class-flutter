@@ -8,13 +8,9 @@ class BlocProvider<T extends Bloc> extends StatefulWidget {
     Key? key,
     required this.bloc,
     required this.child,
-  })  : assert(bloc != null),
-        assert(child != null),
-        super(key: key);
+  }) : super(key: key);
 
   static T of<T extends Bloc>(BuildContext context) {
-    assert(context != null);
-
     BlocProviderState<T> state =
         context.findAncestorStateOfType<BlocProviderState<T>>()!;
 

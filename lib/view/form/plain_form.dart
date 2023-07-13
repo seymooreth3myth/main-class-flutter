@@ -13,10 +13,7 @@ class PlainForm<I, O> extends ManualForm<I, O> {
     required I initialModel,
     required PlainFormBuilder<I> formBuilder,
     ErrorCallback? onSubmitError,
-  })  : assert(formBuilder != null),
-        assert(buttonText != null),
-        assert(initialModel != null),
-        assert(bloc != null),
+  })  : assert(initialModel != null),
         super(
           initialModel: initialModel,
           bloc: bloc,

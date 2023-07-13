@@ -11,9 +11,7 @@ class ManualForm<I, O> extends StatelessWidget {
     required this.bloc,
     required this.initialModel,
     required this.formBuilder,
-  })  : assert(formBuilder != null),
-        assert(initialModel != null),
-        assert(bloc != null);
+  }) : assert(initialModel != null);
 
   final FormBloc<I, O> bloc;
   final I initialModel;
@@ -36,9 +34,7 @@ class _InnerManualForm<I, O, B extends FormBloc<I, O>> extends StatefulWidget {
     required this.initialModel,
     this.disableSubmitOnInvalid = false,
     required this.formBuilder,
-  })  : assert(formBuilder != null),
-        assert(initialModel != null),
-        assert(disableSubmitOnInvalid != null);
+  }) : assert(initialModel != null);
 
   final I initialModel;
   final bool disableSubmitOnInvalid;

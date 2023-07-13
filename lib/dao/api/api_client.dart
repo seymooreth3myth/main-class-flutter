@@ -3,7 +3,7 @@ part of main_class.dao.api;
 typedef JsonDecoder<T> = T Function(Map<String, dynamic> json);
 typedef JsonEncoder<T> = Map<String, dynamic> Function(T json);
 
-typedef ErrorHandler = Future<dynamic> Function(DioError error);
+typedef ErrorHandler = Future<dynamic> Function(DioException error);
 
 class ApiClient {
   final String basePath;
@@ -44,7 +44,7 @@ class ApiClient {
       return resp.data != null && fromJson != null
           ? fromJson(resp.data)
           : resp.data;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       if (errorHandler != null) {
         await errorHandler!(error);
       }
@@ -74,7 +74,7 @@ class ApiClient {
       return resp.data != null && fromJson != null
           ? fromJson(resp.data)
           : resp.data;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       if (errorHandler != null) {
         await errorHandler!(error);
       }
@@ -104,7 +104,7 @@ class ApiClient {
       return resp.data != null && fromJson != null
           ? fromJson(resp.data)
           : resp.data;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       if (errorHandler != null) {
         await errorHandler!(error);
       }
@@ -131,7 +131,7 @@ class ApiClient {
       return resp.data != null && fromJson != null
           ? fromJson(resp.data)
           : resp.data;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       if (errorHandler != null) {
         await errorHandler!(error);
       }

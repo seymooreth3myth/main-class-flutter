@@ -1,48 +1,60 @@
 part of main_class.utils;
+
 launchEndereco(String endereco) async {
   if (Platform.isIOS) {
     String encoded = Uri.encodeQueryComponent(endereco);
     print("maps://maps.apple.com/?daddr=$encoded");
-    launch("maps://maps.apple.com/?daddr=$encoded");
+    Uri url = Uri.parse("maps://maps.apple.com/?daddr=$encoded");
+    launchUrl(url);
   } else {
-    launch("geo:0,0?q=$endereco");
+    Uri url = Uri.parse("geo:0,0?q=$endereco");
+    launchUrl(url);
   }
 }
 
 launchTelefone(String telefone) async {
-  launch("tel:0$telefone");
+  Uri url = Uri.parse("tel:0$telefone");
+  launchUrl(url);
 }
 
 launchEmail(String email) async {
-  launch("mailto:$email");
+  Uri url = Uri.parse("mailto:$email");
+  launchUrl(url);
 }
 
 launchWhatsapp(String whatsapp) async {
-  launch("https://wa.me/$whatsapp");
+  Uri url = Uri.parse("https://wa.me/$whatsapp");
+  launchUrl(url);
 }
 
 launchYoutube(String id) async {
   String path = "www.youtube.com/watch?v=$id";
 
   if (Platform.isIOS) {
-    if (await canLaunch('youtube://$path')) {
-      await launch('youtube://$path', forceSafariVC: false);
+    Uri url = Uri.parse('youtube://$path');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
     } else {
-      await launch('https://$path');
+      Uri url = Uri.parse('https://$path');
+      await launchUrl(url);
     }
   } else {
-    await launch('https://$path');
+    Uri url = Uri.parse('https://$path');
+    await launchUrl(url);
   }
 }
 
 launchSite(String site) async {
   if (site.startsWith("http")) {
-    launch(site);
+    Uri url = Uri.parse(site);
+    launchUrl(url);
   } else {
-    launch("http://$site");
+    Uri url = Uri.parse("http://$site");
+    launchUrl(url);
   }
 }
 
 launchMail(String email) async {
-  launch("mailto:$email");
+  Uri url = Uri.parse(email);
+  launchUrl(url);
 }

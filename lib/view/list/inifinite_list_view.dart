@@ -13,9 +13,7 @@ class InfiniteListView<T extends Model, Q extends Query>
     this.emptyStateMessage,
     this.defaultErrorMessage,
     this.tryAgainText,
-  })  : assert(bloc != null),
-        assert(scrollDirection != null),
-        assert(itemBuilder != null);
+  });
 
   final bool reverse;
   final InfiniteListBloc<T, Q> bloc;

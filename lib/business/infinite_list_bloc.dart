@@ -89,6 +89,7 @@ abstract class InfiniteListBloc<M extends Model, Q extends Query>
       );
 
       return page;
+      // ignore: unused_catch_stack
     } catch (e, stack) {
       items.add(items.value.copyWith(
         state: InfiniteListState.error,

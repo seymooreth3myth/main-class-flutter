@@ -13,8 +13,6 @@ class MensagemTextBuilder extends StatefulWidget {
   }) : super(key: key);
 
   static TextBuilder of(BuildContext context) {
-    assert(context != null);
-
     MensagemTextBuilderState? state =
         context.findAncestorStateOfType<MensagemTextBuilderState>();
 
