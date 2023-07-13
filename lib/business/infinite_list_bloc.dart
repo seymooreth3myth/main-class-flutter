@@ -24,23 +24,21 @@ class SnapshotInfiniteList<M extends Model, Q extends Query> {
     required this.total,
   });
 
-  bool get hasNext => nextPageRef != null;
-
   SnapshotInfiniteList<M, Q> copyWith({
-    List<M>? data,
-    InfiniteListState? state,
-    Q? query,
+    required List<M> data,
+    required InfiniteListState state,
+    required Q query,
     dynamic error,
     dynamic nextPageRef,
-    int? total,
+    required int total,
   }) {
     return SnapshotInfiniteList<M, Q>(
-      data: data ?? this.data,
-      state: state ?? this.state,
-      query: query ?? this.query,
+      data: data,
+      state: state,
+      query: query,
       error: error ?? this.error,
       nextPageRef: nextPageRef ?? this.nextPageRef,
-      total: total ?? this.total,
+      total: total,
     );
   }
 }
@@ -63,10 +61,14 @@ abstract class InfiniteListBloc<M extends Model, Q extends Query>
   });
 
   Future<Page<M>> query(Q query, {bool reset = false}) async {
-    items.add(items.value.copyWith(
-      data: reset ? [] : null,
-      state: InfiniteListState.quering,
-    ));
+    items.add(
+      items.value.copyWith(
+        data: [],
+        state: InfiniteListState.quering,
+        query: query,
+        total: 0,
+      ),
+    );
 
     try {
       Page<M> page = await queryDAO.query(query);
@@ -88,6 +90,9 @@ abstract class InfiniteListBloc<M extends Model, Q extends Query>
       // ignore: unused_catch_stack
     } catch (e, stack) {
       items.add(items.value.copyWith(
+        query: query,
+        data: [],
+        total: 0,
         state: InfiniteListState.error,
         error: e,
       ));
