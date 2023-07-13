@@ -7,11 +7,13 @@ class CommandButton extends StatefulWidget {
   final Widget child;
   final CommandCallback onPressed;
   final EdgeInsetsGeometry padding;
+  final ButtonStyle style;
 
   CommandButton({
     required this.child,
     required this.onPressed,
     this.padding = const EdgeInsets.all(0),
+    this.style = const ButtonStyle(),
   });
 
   @override
@@ -24,6 +26,7 @@ class _CommandButtonState extends State<CommandButton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+      style: widget.style,
       child: Padding(
         padding: widget.padding,
         child: _buildChild(),
