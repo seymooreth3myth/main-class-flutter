@@ -10,37 +10,37 @@ enum InfiniteListState {
 class SnapshotInfiniteList<M extends Model, Q extends Query> {
   final List<M> data;
   final InfiniteListState state;
-  final Q query;
+  final Q? query;
   final dynamic error;
   final dynamic nextPageRef;
-  final int total;
+  final int? total;
 
   const SnapshotInfiniteList({
-    required this.data,
+    this.data = const [],
     required this.state,
     required this.query,
     this.error,
     this.nextPageRef,
-    required this.total,
+    this.total,
   });
 
   bool get hasNext => nextPageRef != null;
 
   SnapshotInfiniteList<M, Q> copyWith({
-    required List<M> data,
-    required InfiniteListState state,
-    required Q query,
+    List<M>? data,
+    InfiniteListState? state,
+    Q? query,
     dynamic error,
     dynamic nextPageRef,
-    required int total,
+    int? total,
   }) {
     return SnapshotInfiniteList<M, Q>(
-      data: data,
-      state: state,
-      query: query,
+      data: data ?? this.data,
+      state: state ?? this.state,
+      query: query ?? this.query,
       error: error ?? this.error,
       nextPageRef: nextPageRef ?? this.nextPageRef,
-      total: total,
+      total: total ?? this.total,
     );
   }
 }
@@ -94,8 +94,6 @@ abstract class InfiniteListBloc<M extends Model, Q extends Query>
     } catch (e, stack) {
       items.add(items.value.copyWith(
         query: query,
-        data: [],
-        total: 0,
         state: InfiniteListState.error,
         error: e,
       ));
@@ -105,7 +103,7 @@ abstract class InfiniteListBloc<M extends Model, Q extends Query>
   }
 
   Future<Page<M>> nextPage() {
-    Q q = items.value.query.copyWith() as Q;
+    Q q = items.value.query?.copyWith() as Q;
     q.pageRef = items.value.nextPageRef;
     return query(q);
   }

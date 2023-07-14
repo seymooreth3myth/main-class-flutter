@@ -52,7 +52,9 @@ class InfiniteCustomScrollView<M extends Model, Q extends Query>
                 ...preSlivers,
                 new SliverList(
                   delegate: SliverChildListDelegate([
-                    _buildEmptyState(context, list.query),
+                    list.query != null
+                        ? _buildEmptyState(context, list.query!)
+                        : SizedBox.shrink(),
                   ]),
                 ),
                 ...posSlivers,
@@ -83,7 +85,7 @@ class InfiniteCustomScrollView<M extends Model, Q extends Query>
                           if (index == 0 && separatorBuilder != null)
                             separatorBuilder!(context, null, list.data[index]),
                           itemBuilder(
-                              context, list.data[index], list.query, index),
+                              context, list.data[index], list.query!, index),
                           if (separatorBuilder != null)
                             separatorBuilder!(
                                 context,
@@ -182,7 +184,7 @@ class InfiniteCustomScrollView<M extends Model, Q extends Query>
           ws.add(separatorBuilder!(context, null, null));
         }
 
-        ws.add(itemBuilder(context, null, list.query, i));
+        ws.add(itemBuilder(context, null, list.query!, i));
       }
 
       return Shimmer.fromColors(

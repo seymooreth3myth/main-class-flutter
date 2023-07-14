@@ -44,7 +44,7 @@ class InfiniteListView<T extends Model, Q extends Query>
           if ((list.data.isEmpty) &&
               list.nextPageRef == null &&
               list.state == InfiniteListState.success) {
-            return _buildEmptyState(context, list.query);
+            return _buildEmptyState(context, list.query!);
           }
 
           return ListView.separated(
@@ -84,7 +84,7 @@ class InfiniteListView<T extends Model, Q extends Query>
                 children: <Widget>[
                   if (index == 0 && separatorBuilder != null)
                     separatorBuilder!(context, null, list.data[index]),
-                  itemBuilder(context, list.data[index], list.query, index),
+                  itemBuilder(context, list.data[index], list.query!, index),
                   if (index == list.data.length - 1 && separatorBuilder != null)
                     separatorBuilder!(context, list.data[index], null),
                 ],
