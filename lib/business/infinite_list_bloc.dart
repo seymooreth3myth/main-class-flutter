@@ -24,6 +24,8 @@ class SnapshotInfiniteList<M extends Model, Q extends Query> {
     required this.total,
   });
 
+  bool get hasNext => nextPageRef != null;
+
   SnapshotInfiniteList<M, Q> copyWith({
     required List<M> data,
     required InfiniteListState state,
@@ -45,7 +47,7 @@ class SnapshotInfiniteList<M extends Model, Q extends Query> {
 
 abstract class InfiniteListBloc<M extends Model, Q extends Query>
     implements Bloc {
-  late BehaviorSubject<SnapshotInfiniteList<M, Q>> items;
+  BehaviorSubject<SnapshotInfiniteList<M, Q>> items;
 
   final QueryDAO<M, Q> queryDAO;
 
@@ -56,6 +58,7 @@ abstract class InfiniteListBloc<M extends Model, Q extends Query>
   Stream<SnapshotInfiniteList<M, Q>> get listStream => items.stream;
 
   InfiniteListBloc({
+    required this.items,
     required this.queryDAO,
     required this.rootQuery,
   });

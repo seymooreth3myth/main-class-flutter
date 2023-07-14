@@ -92,6 +92,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_lints",
+      "rootUri": "file:///Users/fabiocarlos/.pub-cache/hosted/pub.dev/flutter_lints-2.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///Users/fabiocarlos/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -120,6 +126,12 @@
       "rootUri": "file:///Users/fabiocarlos/.pub-cache/hosted/pub.dev/js-0.6.5",
       "packageUri": "lib/",
       "languageVersion": "2.16"
+    },
+    {
+      "name": "lints",
+      "rootUri": "file:///Users/fabiocarlos/.pub-cache/hosted/pub.dev/lints-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "matcher",
@@ -272,7 +284,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2023-07-13T18:18:22.171608Z",
+  "generated": "2023-07-14T01:00:09.075957Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

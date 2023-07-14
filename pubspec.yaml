@@ -14,6 +14,7 @@ dependencies:
   dio:
   shimmer:
   intl:
+  flutter_lints: ^2.0.2
 
 dev_dependencies:
   flutter_test:

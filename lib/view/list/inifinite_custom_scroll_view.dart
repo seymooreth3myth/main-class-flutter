@@ -44,7 +44,7 @@ class InfiniteCustomScrollView<M extends Model, Q extends Query>
         builder: (context, snapshot) {
           SnapshotInfiniteList<M, Q> list = snapshot.data!;
 
-          if ((list.data?.isEmpty ?? true) &&
+          if ((list.data.isEmpty) &&
               list.nextPageRef == null &&
               list.state == InfiniteListState.success) {
             return CustomScrollView(
@@ -65,7 +65,7 @@ class InfiniteCustomScrollView<M extends Model, Q extends Query>
                 new SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
-                      if (list.data == null || index >= list.data!.length) {
+                      if (index >= list.data.length) {
                         if (list.state == InfiniteListState.error) {
                           return _buildError(context, list.error);
                         } else {
@@ -81,20 +81,20 @@ class InfiniteCustomScrollView<M extends Model, Q extends Query>
                       return Column(
                         children: <Widget>[
                           if (index == 0 && separatorBuilder != null)
-                            separatorBuilder!(context, null, list.data![index]),
+                            separatorBuilder!(context, null, list.data[index]),
                           itemBuilder(
-                              context, list.data![index], list.query, index),
+                              context, list.data[index], list.query, index),
                           if (separatorBuilder != null)
                             separatorBuilder!(
                                 context,
-                                list.data![index],
-                                index == list.data!.length - 1
+                                list.data[index],
+                                index == list.data.length - 1
                                     ? null
-                                    : list.data![index + 1]),
+                                    : list.data[index + 1]),
                         ],
                       );
                     },
-                    childCount: (list.data?.length ?? 0) +
+                    childCount: (list.data.length) +
                         (list.state != InfiniteListState.success || list.hasNext
                             ? 1
                             : 0),

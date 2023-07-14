@@ -9,7 +9,7 @@ class Page<M extends Model> {
 
   const Page({
     required this.result,
-    required this.total,
+    this.total = 0,
     this.nextPageRef,
   });
 }

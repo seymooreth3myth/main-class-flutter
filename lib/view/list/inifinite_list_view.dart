@@ -41,7 +41,7 @@ class InfiniteListView<T extends Model, Q extends Query>
         builder: (context, snapshot) {
           SnapshotInfiniteList<T, Q> list = snapshot.data!;
 
-          if ((list.data?.isEmpty ?? true) &&
+          if ((list.data.isEmpty) &&
               list.nextPageRef == null &&
               list.state == InfiniteListState.success) {
             return _buildEmptyState(context, list.query);
@@ -52,8 +52,8 @@ class InfiniteListView<T extends Model, Q extends Query>
               if (separatorBuilder != null) {
                 return separatorBuilder!(
                   context,
-                  index < list.data!.length ? list.data![index] : null,
-                  index < list.data!.length - 1 ? list.data![index + 1] : null,
+                  index < list.data.length ? list.data[index] : null,
+                  index < list.data.length - 1 ? list.data[index + 1] : null,
                 );
               }
 
@@ -62,12 +62,12 @@ class InfiniteListView<T extends Model, Q extends Query>
             padding: padding,
             reverse: reverse,
             scrollDirection: scrollDirection,
-            itemCount: (list.data?.length ?? 0) +
+            itemCount: (list.data.length) +
                 (list.state != InfiniteListState.success || list.hasNext
                     ? 1
                     : 0),
             itemBuilder: (context, index) {
-              if (list.data == null || index >= list.data!.length) {
+              if (index >= list.data.length) {
                 if (list.state == InfiniteListState.error) {
                   return _buildError(context, list.error);
                 } else {
@@ -83,11 +83,10 @@ class InfiniteListView<T extends Model, Q extends Query>
                     reverse ? VerticalDirection.up : VerticalDirection.down,
                 children: <Widget>[
                   if (index == 0 && separatorBuilder != null)
-                    separatorBuilder!(context, null, list.data![index]),
-                  itemBuilder(context, list.data![index], list.query, index),
-                  if (index == list.data!.length - 1 &&
-                      separatorBuilder != null)
-                    separatorBuilder!(context, list.data![index], null),
+                    separatorBuilder!(context, null, list.data[index]),
+                  itemBuilder(context, list.data[index], list.query, index),
+                  if (index == list.data.length - 1 && separatorBuilder != null)
+                    separatorBuilder!(context, list.data[index], null),
                 ],
               );
             },

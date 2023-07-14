@@ -28,7 +28,9 @@ abstract class FirebaseQueryDAO<M extends Model, Q extends Query>
         await whereQuery.limit(query.limit ?? 10).get();
 
     return Page(
-      result: snapshot.docs.map((doc) => fromJson(doc.id, doc.data() as dynamic)).toList(),
+      result: snapshot.docs
+          .map((doc) => fromJson(doc.id, doc.data() as dynamic))
+          .toList(),
       nextPageRef: snapshot.docs.length == (query.limit ?? 10)
           ? snapshot.docs.last
           : null,
